@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <post-form @create="createPost" />
-    <post-list :posts="posts" />
+    <post-list :posts="posts" @remove="removePost" />
   </div>
 </template>
 
@@ -38,6 +38,10 @@ export default {
     createPost(post) {
       console.log('appvue');
       this.posts.push(post);
+    },
+    removePost(post) {
+      console.log('removePost');
+      this.posts = this.posts.filter((p) => p.id !== post.id);
     },
   },
 };

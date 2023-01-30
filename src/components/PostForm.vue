@@ -2,14 +2,17 @@
   <div>
     <form @submit.prevent>
       <h4>Создать пост</h4>
-      <input type="text" v-model="post.title" class="input" />
-      <input type="text" v-model="post.body" class="input" />
-      <button class="btn" @click="createPost">Создать пост</button>
+      <MyInput type="text" v-model="post.title" placeholder="Название" />
+      <MyInput type="text" v-model="post.body" placeholder="Описание" />
+      <MyButton class="btn" @click="createPost">Создать пост</MyButton>
     </form>
   </div>
 </template>
 
 <script>
+import MyButton from './UI/MyButton.vue';
+import MyInput from './UI/MyInput.vue';
+
 export default {
   data() {
     return {
@@ -35,11 +38,12 @@ export default {
       };
     },
   },
-  /*  emits: {
+  emits: {
     create() {
       return true;
     },
-  }, */
+  },
+  components: { MyButton, MyInput },
 };
 </script>
 
@@ -49,18 +53,8 @@ form {
   flex-direction: column;
 }
 
-.input {
-  width: 100%;
-  border: 1px solid teal;
-  padding: 10px 15px;
-  margin-top: 15px;
-}
 .btn {
   margin-top: 15px;
   align-self: flex-end;
-  padding: 10px 15px;
-  background: none;
-  color: teal;
-  border: 1px solid teal;
 }
 </style>

@@ -31,4 +31,8 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
+.post > div:not([class*='btns']) {
+  padding: 5px;
+  word-break: break-all;
+}
 </style>

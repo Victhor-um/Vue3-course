@@ -53,6 +53,7 @@ export default {
       return true;
     },
   },
+
   components: { MyButton, MyInput },
 };
 </script>

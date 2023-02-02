@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <h1>Страница с постами</h1>
+    <MyInput v-model="searchQuery" placeholder="Поиск..."></MyInput>
     <div class="app_btns">
       <MyButton @click="showDialog">Создать пост</MyButton>
       <MySelect v-model="selectedSort" :options="sortOptions" />
@@ -8,7 +9,11 @@
     <MyDialog v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </MyDialog>
-    <post-list v-if="!isPostLoading" :posts="posts" @remove="removePost" />
+    <post-list
+      v-if="!isPostLoading"
+      :posts="sortedAndSearchedPosts"
+      @remove="removePost"
+    />
     <div v-else>Идёт загрузка...</div>
   </div>
 </template>
@@ -20,6 +25,7 @@ import MyButton from './components/UI/MyButton.vue';
 import MyDialog from './components/UI/MyDialog.vue';
 import MySelect from './components/UI/MySelect.vue';
 import axios from 'axios';
+import MyInput from './components/UI/MyInput.vue';
 export default {
   components: {
     PostList,
@@ -27,6 +33,7 @@ export default {
     MyDialog,
     MyButton,
     MySelect,
+    MyInput,
   },
   data() {
     return {
@@ -34,6 +41,10 @@ export default {
       dialogVisible: false,
       isPostLoading: false,
       selectedSort: '',
+      searchQuery: '',
+      page: 1,
+      limit: 10,
+      totalPages: 0,
       sortOptions: [
         { value: 'title', name: 'По названию' },
         { value: 'body', name: 'По описанию' },
@@ -57,7 +68,16 @@ export default {
       try {
         this.isPostLoading = true;
         const response = await axios.get(
-          'https://jsonplaceholder.typicode.com/posts?_limit=10'
+          'https://jsonplaceholder.typicode.com/posts',
+          {
+            params: {
+              _page: this.page,
+              __limit: this.limit,
+            },
+          }
+        );
+        this.totalPages = Math.ceil(
+          response.headers['x-total-count'] / this.limit
         );
         this.posts = response.data;
         console.log('🚀 ~ file: App.vue:67 ~ fetchUsers ~ response', response);
@@ -68,16 +88,24 @@ export default {
       }
     },
   },
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) => {
+        return post1[this.selectedSort]?.localeCompare(
+          post2[this.selectedSort]
+        );
+      });
+    },
+    sortedAndSearchedPosts() {
+      return this.sortedPosts.filter((post) =>
+        post.title.toLowerCase().includes(this.searchQuery.toLocaleLowerCase())
+      );
+    },
+  },
   mounted() {
     this.fetchPosts();
   },
-  watch: {
-    selectedSort(newValue) {
-      this.posts.sort((post1, post2) => {
-        return post1[newValue]?.localeCompare(post2[newValue]);
-      });
-    },
-  },
+  watch: {},
 };
 </script>
 

@@ -15,6 +15,17 @@
       @remove="removePost"
     />
     <div v-else>Идёт загрузка...</div>
+    <div class="page__wrapper">
+      <div
+        v-for="pageNumber in totalPages"
+        key="pageNumber"
+        class="page"
+        :class="{ 'current-page': pageNumber === page }"
+        @click="changePage(pageNumber)"
+      >
+        {{ pageNumber }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -87,6 +98,9 @@ export default {
         this.isPostLoading = false;
       }
     },
+    changePage(pageNumber) {
+      this.page = pageNumber;
+    },
   },
   computed: {
     sortedPosts() {
@@ -105,7 +119,11 @@ export default {
   mounted() {
     this.fetchPosts();
   },
-  watch: {},
+  watch: {
+    page() {
+      this.fetchPosts();
+    },
+  },
 };
 </script>
 
@@ -122,5 +140,17 @@ export default {
   margin: 15px 0;
   display: flex;
   justify-content: space-between;
+}
+.page__wrapper {
+  display: flex;
+  margin-top: 15;
+}
+.page {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 5px;
+}
+.current-page {
+  border: 2px solid teal;
 }
 </style>

@@ -8,7 +8,8 @@
         :post="post"
         :key="post.id"
         @remove="$emit('remove', post)"
-    /></TransitionGroup>
+      />
+    </TransitionGroup>
   </div>
   <h2 style="color: red" v-else>Список постов пуст</h2>
 </template>

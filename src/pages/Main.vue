@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>Welcome</h1>
-    <RouterLink to="/postPage">posts</RouterLink>
-
+    <RouterLink to="/posts">posts</RouterLink>
+    <hr />
     <RouterLink to="/about">about</RouterLink>
   </div>
 </template>

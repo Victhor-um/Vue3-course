@@ -2,7 +2,7 @@
   <div class="navbar">
     <div>Vue 3</div>
     <div class="navbar__btns">
-      <MyButton @click="$router.push('/postPage')">Posts</MyButton>
+      <MyButton @click="$router.push('/posts')">Posts</MyButton>
       <MyButton @click="$router.push('/about')">About</MyButton>
       <MyButton @click="$router.push('/')">Home</MyButton>
     </div>

@@ -3,6 +3,7 @@
     <form @submit.prevent>
       <h4>Создать пост</h4>
       <MyInput
+        v-focus
         maxlength="10"
         type="text"
         v-model="post.title"

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Страница с постами</h1>
-    <MyInput v-model="searchQuery" placeholder="Поиск..."></MyInput>
+    <MyInput v-focus v-model="searchQuery" placeholder="Поиск..."></MyInput>
     <div class="app_btns">
       <MyButton @click="showDialog">Создать пост</MyButton>
       <MySelect v-model="selectedSort" :options="sortOptions" />

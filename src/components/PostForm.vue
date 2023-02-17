@@ -3,6 +3,7 @@
     <form @submit.prevent>
       <h4>Создать пост</h4>
       <MyInput
+        v-focus
         maxlength="10"
         type="text"
         v-model="post.title"
@@ -34,7 +35,6 @@ export default {
   },
   methods: {
     createPost() {
-      console.log('123');
       this.post.id = Date.now();
       if (this.post.body.length && this.post.title.length) {
         this.$emit('create', this.post);

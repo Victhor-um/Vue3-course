@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     createPost() {
-      console.log('123');
       this.post.id = Date.now();
       if (this.post.body.length && this.post.title.length) {
         this.$emit('create', this.post);

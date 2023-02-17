@@ -65,12 +65,10 @@ export default {
   },
   methods: {
     createPost(post) {
-      console.log('appvue');
       this.posts.push(post);
       this.dialogVisible = false;
     },
     removePost(post) {
-      console.log('removePost');
       this.posts = this.posts.filter((p) => p.id !== post.id);
     },
     showDialog() {
@@ -92,7 +90,6 @@ export default {
           response.headers['x-total-count'] / this.limit
         );
         this.posts = response.data;
-        console.log('🚀 ~ file: App.vue:67 ~ fetchUsers ~ response', response);
       } catch (error) {
         alert('Error');
       } finally {
@@ -116,7 +113,6 @@ export default {
           response.headers['x-total-count'] / this.limit
         );
         this.posts = [...this.posts, ...response.data];
-        console.log('🚀 ~ file: App.vue:67 ~ fetchUsers ~ response', response);
       } catch (error) {
         alert('Error');
       } finally {

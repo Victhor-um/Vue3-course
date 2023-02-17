@@ -4,7 +4,7 @@
     <div><strong>Название: </strong>{{ post.title }}</div>
     <div><strong>Описание: </strong>{{ post.body }}</div>
     <div class="post__btns">
-      <MyButton @click="$router.push(`/posts/${post.id}`)">Открыть</MyButton>
+      <MyButton @click="openPost()">Открыть</MyButton>
       <MyButton @click="$emit('remove', post)">Удалить</MyButton>
     </div>
   </div>
@@ -18,6 +18,11 @@ export default {
     post: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    openPost() {
+      this.$router.push(`/posts/${this.post.id}`);
     },
   },
   components: { MyButton },

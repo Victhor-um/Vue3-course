@@ -10,7 +10,7 @@
       <post-form @create="createPost" />
     </MyDialog>
     <post-list
-      v-if="!isPostLoading"
+      v-if="!isPostsLoading"
       :posts="sortedAndSearchedPosts"
       @remove="removePost"
     />
@@ -51,7 +51,7 @@ export default {
     return {
       posts: [],
       dialogVisible: false,
-      isPostLoading: false,
+      isPostsLoading: false,
       selectedSort: '',
       searchQuery: '',
       page: 1,
@@ -76,7 +76,7 @@ export default {
     },
     async fetchPosts() {
       try {
-        this.isPostLoading = true;
+        this.isPostsLoading = true;
         const response = await axios.get(
           'https://jsonplaceholder.typicode.com/posts',
           {
@@ -93,7 +93,7 @@ export default {
       } catch (error) {
         alert('Error');
       } finally {
-        this.isPostLoading = false;
+        this.isPostsLoading = false;
       }
     },
     async loadMorePosts() {

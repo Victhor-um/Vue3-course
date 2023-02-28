@@ -19,6 +19,7 @@ const routes = [
   {
     path: '/posts/:id',
     component: PostIdPage,
+    props: true,
   },
 ];
 const router = createRouter({

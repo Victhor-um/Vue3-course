@@ -38,6 +38,7 @@ import MyDialog from '@/components/UI/MyDialog.vue';
 import MySelect from '@/components/UI/MySelect.vue';
 import axios from 'axios';
 import MyInput from '@/components/UI/MyInput.vue';
+
 export default {
   components: {
     PostList,

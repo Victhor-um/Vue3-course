@@ -4,7 +4,7 @@
     <MyInput
       v-focus
       :model-value="searchQuery"
-      @update:model-value="setSearchQuery"
+      @update:model-value="onUpdateSearchQuery"
       placeholder="Поиск..."
     ></MyInput>
     <div class="app_btns">
@@ -47,6 +47,7 @@ import MyDialog from '@/components/UI/MyDialog.vue';
 import MySelect from '@/components/UI/MySelect.vue';
 import MyInput from '@/components/UI/MyInput.vue';
 import store from '@/store/index.js';
+import STATE_TYPES from '@/store/Types.js';
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
 export default {
   components: {
@@ -61,17 +62,17 @@ export default {
   data() {
     return {
       dialogVisible: false,
+      searchQuery: '',
     };
   },
   methods: {
     ...mapMutations({
-      setPage: 'post/setPage',
-      setSearchQuery: 'post/setSearchQuery',
-      setSelectedSort: 'post/setSelectedSort',
+      setPage: STATE_TYPES.mutations.setPage,
+      setSelectedSort: STATE_TYPES.mutations.setSelectedSort,
     }),
     ...mapActions({
-      loadMorePosts: 'post/loadMorePosts',
-      fetchPosts: 'post/fetchPosts',
+      loadMorePosts: STATE_TYPES.actions.loadMorePosts,
+      fetchPosts: STATE_TYPES.actions.fetchPosts,
     }),
     createPost(post) {
       this.posts.push(post);
@@ -83,6 +84,9 @@ export default {
     showDialog() {
       this.dialogVisible = true;
     },
+    onUpdateSearchQuery(value) {
+      this.searchQuery = value;
+    },
 
     // changePage(pageNumber) {
     //   this.page = pageNumber;
@@ -93,16 +97,21 @@ export default {
       posts: (state) => state.post.posts,
       isPostsLoading: (state) => state.post.isPostsLoading,
       selectedSort: (state) => state.post.selectedSort,
-      searchQuery: (state) => state.post.searchQuery,
+      // searchQuery: (state) => state.post.searchQuery,
       page: (state) => state.post.page,
       limit: (state) => state.post.limit,
       totalPages: (state) => state.post.totalPages,
       sortOptions: (state) => state.post.sortOptions,
     }),
     ...mapGetters({
-      sortedPosts: 'post/sortedPosts',
-      sortedAndSearchedPosts: 'post/sortedAndSearchedPosts',
+      sortedPosts: STATE_TYPES.getters.sortedPosts,
+      // sortedAndSearchedPosts: 'post/sortedAndSearchedPosts',
     }),
+    sortedAndSearchedPosts(searchQuery) {
+      const func = this.$store.getters['post/sortedAndSearchedPosts'];
+
+      return func(this.searchQuery);
+    },
   },
   mounted() {
     this.fetchPosts();

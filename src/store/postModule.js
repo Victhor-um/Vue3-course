@@ -1,10 +1,25 @@
 import axios from 'axios';
+import STATE_TYPES from './Types';
+
+const MODULE_NAME = 'post/';
+const POST_TYPES = structuredClone(STATE_TYPES);
+
+function normalizeNames(Obj) {
+  for (let [typeName, typeValue] of Object.entries(Obj)) {
+    if (typeof typeValue === 'string') {
+      Obj[typeName] = typeValue.replace(MODULE_NAME, '');
+    } else if (typeof typeValue === 'object') {
+      normalizeNames(typeValue);
+    }
+  }
+}
+normalizeNames(POST_TYPES);
+
 export const postModule = {
   state: () => ({
     posts: [],
     isPostsLoading: false,
     selectedSort: '',
-    searchQuery: '',
     page: 1,
     limit: 10,
     totalPages: 0,
@@ -14,15 +29,20 @@ export const postModule = {
     ],
   }),
   getters: {
-    sortedPosts(state) {
+    [POST_TYPES.getters.sortedPosts](state) {
       return [...state.posts].sort((post1, post2) =>
         post1[state.selectedSort]?.localeCompare(post2[state.selectedSort])
       );
     },
-    sortedAndSearchedPosts(state, getters) {
-      return getters.sortedPosts.filter((post) =>
-        post.title.toLowerCase().includes(state.searchQuery.toLowerCase())
-      );
+    [POST_TYPES.getters.sortedAndSearchedPosts](state, getters) {
+      return (searchQuery) => {
+        return getters.sortedPosts.filter((post) =>
+          post.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      };
+      // return getters.sortedPosts.filter((post) =>
+      //   post.title.toLowerCase().includes(state.searchQuery.toLowerCase())
+      // );
     },
   },
   mutations: {
@@ -71,7 +91,7 @@ export const postModule = {
     },
     async loadMorePosts({ state, commit }) {
       try {
-        commit('setPage', state.page++);
+        commit('setPage', state.page + 1);
 
         const response = await axios.get(
           'https://jsonplaceholder.typicode.com/posts',
@@ -88,7 +108,7 @@ export const postModule = {
         );
         commit('setPosts', [...state.posts, ...response.data]);
       } catch (error) {
-        alert('Error');
+        console.error(error);
       } finally {
       }
     },

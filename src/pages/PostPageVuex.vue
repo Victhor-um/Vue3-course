@@ -23,7 +23,7 @@
       @remove="removePost"
       v-if="!isPostsLoading"
     />
-    <div v-else>Идёт загрузка...</div>
+    <div v-else="">Идёт загрузка...</div>
     <div
       v-if="page < limit"
       v-intersection="loadMorePosts"

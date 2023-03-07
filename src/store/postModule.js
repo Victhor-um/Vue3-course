@@ -1,19 +1,5 @@
 import axios from 'axios';
-import STATE_TYPES from './Types';
-
-const MODULE_NAME = 'post/';
-const POST_TYPES = structuredClone(STATE_TYPES);
-
-function normalizeNames(Obj) {
-  for (let [typeName, typeValue] of Object.entries(Obj)) {
-    if (typeof typeValue === 'string') {
-      Obj[typeName] = typeValue.replace(MODULE_NAME, '');
-    } else if (typeof typeValue === 'object') {
-      normalizeNames(typeValue);
-    }
-  }
-}
-normalizeNames(POST_TYPES);
+import { NAMESPACED_TYPES as POST_TYPES } from './Types';
 
 export const postModule = {
   state: () => ({

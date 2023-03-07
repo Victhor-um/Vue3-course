@@ -16,5 +16,19 @@ const STATE_TYPES = {
     setTotalPages: 'post/setTotalPages',
   },
 };
+const MODULE_NAME = 'post/';
+const NAMESPACED_TYPES = structuredClone(STATE_TYPES);
 
-export default STATE_TYPES;
+function normalizeNames(Obj) {
+  for (let [typeName, typeValue] of Object.entries(Obj)) {
+    if (typeof typeValue === 'string') {
+      Obj[typeName] = typeValue.replace(MODULE_NAME, '');
+    } else if (typeof typeValue === 'object') {
+      normalizeNames(typeValue);
+    }
+  }
+}
+normalizeNames(NAMESPACED_TYPES);
+
+export { NAMESPACED_TYPES };
+export { STATE_TYPES };

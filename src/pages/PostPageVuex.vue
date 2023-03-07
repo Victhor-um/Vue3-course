@@ -24,7 +24,11 @@
       v-if="!isPostsLoading"
     />
     <div v-else>Идёт загрузка...</div>
-    <div v-intersection="loadMorePosts" class="observer"></div>
+    <div
+      v-if="page < limit"
+      v-intersection="loadMorePosts"
+      class="observer"
+    ></div>
     <!-- <div class="page__wrapper">
         <div
           v-for="pageNumber in totalPages"
@@ -87,10 +91,6 @@ export default {
     onUpdateSearchQuery(value) {
       this.searchQuery = value;
     },
-
-    // changePage(pageNumber) {
-    //   this.page = pageNumber;
-    // },
   },
   computed: {
     ...mapState({

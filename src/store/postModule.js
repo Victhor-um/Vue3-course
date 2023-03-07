@@ -68,7 +68,7 @@ export const postModule = {
   actions: {
     async fetchPosts({ state, commit }) {
       try {
-        commit('setLoading', true);
+        if (!state.posts.length) commit('setLoading', true);
 
         const response = await axios.get(
           'https://jsonplaceholder.typicode.com/posts',

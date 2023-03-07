@@ -105,10 +105,9 @@ export default {
     }),
     ...mapGetters({
       sortedPosts: STATE_TYPES.getters.sortedPosts,
-      // sortedAndSearchedPosts: 'post/sortedAndSearchedPosts',
     }),
     sortedAndSearchedPosts(searchQuery) {
-      const func = this.$store.getters['post/sortedAndSearchedPosts'];
+      const func = this.$store.getters['post/sortedAndSearchedPosts']; // ? а тут можно через TYPES вызвать?
 
       return func(this.searchQuery);
     },

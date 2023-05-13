@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'my-dialog',
+  name: "my-dialog",
   props: {
     show: {
       type: Boolean,
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     hideDialog() {
-      this.$emit('update:show', false);
+      this.$emit("update:show", false);
     },
   },
 };

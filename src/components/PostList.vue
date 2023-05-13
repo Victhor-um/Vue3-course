@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import { TransitionGroup } from 'vue';
-import PostItem from './PostItem.vue';
+import { TransitionGroup } from "vue";
+import PostItem from "./PostItem.vue";
 
 export default {
   props: {

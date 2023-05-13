@@ -1,17 +1,17 @@
-import axios from 'axios';
-import { NAMESPACED_TYPES as POST_TYPES } from './Types';
+import axios from "axios";
+import { NAMESPACED_TYPES as POST_TYPES } from "./Types";
 
 export const postModule = {
   state: () => ({
     posts: [],
     isPostsLoading: false,
-    selectedSort: '',
+    selectedSort: "",
     page: 1,
     limit: 10,
     totalPages: 0,
     sortOptions: [
-      { value: 'title', name: 'По названию' },
-      { value: 'body', name: 'По описанию' },
+      { value: "title", name: "По названию" },
+      { value: "body", name: "По описанию" },
     ],
   }),
   getters: {
@@ -54,10 +54,10 @@ export const postModule = {
   actions: {
     async fetchPosts({ state, commit }) {
       try {
-        if (!state.posts.length) commit('setLoading', true);
+        if (!state.posts.length) commit("setLoading", true);
 
         const response = await axios.get(
-          'https://jsonplaceholder.typicode.com/posts',
+          "https://jsonplaceholder.typicode.com/posts",
           {
             params: {
               _page: state.page,
@@ -67,21 +67,21 @@ export const postModule = {
         );
 
         commit(
-          'setTotalPages',
-          Math.ceil(response.headers['x-total-count'] / state.limit)
+          "setTotalPages",
+          Math.ceil(response.headers["x-total-count"] / state.limit)
         );
-        commit('setPosts', [...state.posts, ...response.data]);
+        commit("setPosts", [...state.posts, ...response.data]);
         return response.data;
       } catch (error) {
         console.error(error);
       } finally {
-        commit('setLoading', false);
+        commit("setLoading", false);
       }
     },
     async loadMorePosts(context) {
       try {
-        context.commit('setPage', context.state.page + 1);
-        const test = await context.dispatch('fetchPosts');
+        context.commit("setPage", context.state.page + 1);
+        const test = await context.dispatch("fetchPosts");
       } catch (error) {
         console.error(error);
       } finally {

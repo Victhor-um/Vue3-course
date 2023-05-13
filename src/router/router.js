@@ -1,28 +1,28 @@
-import Main from '@/pages/Main.vue';
-import postPage from '@/pages/PostPage.vue';
-import about from '@/pages/About.vue';
-import PostIdPage from '@/pages/PostIdPage.vue';
-import postPageVuex from '@/pages/PostPageVuex.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import Main from "@/pages/Main.vue";
+import postPage from "@/pages/PostPage.vue";
+import about from "@/pages/About.vue";
+import PostIdPage from "@/pages/PostIdPage.vue";
+import postPageVuex from "@/pages/PostPageVuex.vue";
+import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
-    path: '/',
+    path: "/",
     component: Main,
   },
   {
-    path: '/posts',
+    path: "/posts",
     component: postPage,
   },
   {
-    path: '/about',
+    path: "/about",
     component: about,
   },
   {
-    path: '/posts/:id',
+    path: "/posts/:id",
     component: PostIdPage,
   },
   {
-    path: '/postsVuex',
+    path: "/postsVuex",
     component: postPageVuex,
   },
 ];

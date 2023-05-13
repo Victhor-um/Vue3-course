@@ -4,13 +4,13 @@
 
 <script>
 export default {
-  name: 'MyInput',
+  name: "MyInput",
   props: {
     modelValue: [String, Number],
   },
   methods: {
     updateInput(event) {
-      this.$emit('update:modelValue', event.target.value);
+      this.$emit("update:modelValue", event.target.value);
     },
   },
 };

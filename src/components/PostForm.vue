@@ -21,15 +21,15 @@
 </template>
 
 <script>
-import MyButton from './UI/MyButton.vue';
-import MyInput from './UI/MyInput.vue';
+import MyButton from "./UI/MyButton.vue";
+import MyInput from "./UI/MyInput.vue";
 
 export default {
   data() {
     return {
       post: {
-        title: '',
-        body: '',
+        title: "",
+        body: "",
       },
     };
   },
@@ -37,14 +37,14 @@ export default {
     createPost() {
       this.post.id = Date.now();
       if (this.post.body.length && this.post.title.length) {
-        this.$emit('create', this.post);
+        this.$emit("create", this.post);
       }
       this.resetPost();
     },
     resetPost() {
       this.post = {
-        title: '',
-        body: '',
+        title: "",
+        body: "",
       };
     },
   },
@@ -54,7 +54,7 @@ export default {
     },
   },
 
-  components: { MyButton, MyInput },
+  components: { MyButton: MyButton, MyInput: MyInputChange },
 };
 </script>
 

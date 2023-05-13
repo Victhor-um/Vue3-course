@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import MyButton from './UI/MyButton.vue';
+import MyButton from "./UI/MyButton.vue";
 
 export default {
   props: {
@@ -32,7 +32,7 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-.post > div:not([class*='btns']) {
+.post > div:not([class*="btns"]) {
   padding: 5px;
   word-break: break-all;
 }

@@ -44,15 +44,15 @@
 </template>
 
 <script>
-import PostForm from '@/components/PostForm.vue';
-import PostList from '@/components/PostList.vue';
-import MyButton from '@/components/UI/MyButton.vue';
-import MyDialog from '@/components/UI/MyDialog.vue';
-import MySelect from '@/components/UI/MySelect.vue';
-import MyInput from '@/components/UI/MyInput.vue';
-import store from '@/store/index.js';
-import { STATE_TYPES } from '@/store/Types.js';
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
+import PostForm from "@/components/PostForm.vue";
+import PostList from "@/components/PostList.vue";
+import MyButton from "@/components/UI/MyButton.vue";
+import MyDialog from "@/components/UI/MyDialog.vue";
+import MySelect from "@/components/UI/MySelect.vue";
+import MyInput from "@/components/UI/MyInput.vue";
+import store from "@/store/index.js";
+import { STATE_TYPES } from "@/store/Types.js";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     PostList,
@@ -66,7 +66,7 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      searchQuery: '',
+      searchQuery: "",
     };
   },
   methods: {
@@ -107,7 +107,7 @@ export default {
       sortedPosts: STATE_TYPES.getters.sortedPosts,
     }),
     sortedAndSearchedPosts(searchQuery) {
-      const func = this.$store.getters['post/sortedAndSearchedPosts']; // ? а тут можно через TYPES вызвать?
+      const func = this.$store.getters["post/sortedAndSearchedPosts"]; // ? а тут можно через TYPES вызвать?
 
       return func(this.searchQuery);
     },

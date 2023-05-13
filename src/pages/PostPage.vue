@@ -31,13 +31,13 @@
 </template>
 
 <script>
-import PostForm from '@/components/PostForm.vue';
-import PostList from '@/components/PostList.vue';
-import MyButton from '@/components/UI/MyButton.vue';
-import MyDialog from '@/components/UI/MyDialog.vue';
-import MySelect from '@/components/UI/MySelect.vue';
-import axios from 'axios';
-import MyInput from '@/components/UI/MyInput.vue';
+import PostForm from "@/components/PostForm.vue";
+import PostList from "@/components/PostList.vue";
+import MyButton from "@/components/UI/MyButton.vue";
+import MyDialog from "@/components/UI/MyDialog.vue";
+import MySelect from "@/components/UI/MySelect.vue";
+import axios from "axios";
+import MyInput from "@/components/UI/MyInput.vue";
 export default {
   components: {
     PostList,
@@ -52,14 +52,14 @@ export default {
       posts: [],
       dialogVisible: false,
       isPostsLoading: false,
-      selectedSort: '',
-      searchQuery: '',
+      selectedSort: "",
+      searchQuery: "",
       page: 1,
       limit: 10,
       totalPages: 0,
       sortOptions: [
-        { value: 'title', name: 'По названию' },
-        { value: 'body', name: 'По описанию' },
+        { value: "title", name: "По названию" },
+        { value: "body", name: "По описанию" },
       ],
     };
   },
@@ -78,7 +78,7 @@ export default {
       try {
         this.isPostsLoading = true;
         const response = await axios.get(
-          'https://jsonplaceholder.typicode.com/posts',
+          "https://jsonplaceholder.typicode.com/posts",
           {
             params: {
               _page: this.page,
@@ -87,11 +87,11 @@ export default {
           }
         );
         this.totalPages = Math.ceil(
-          response.headers['x-total-count'] / this.limit
+          response.headers["x-total-count"] / this.limit
         );
         this.posts = response.data;
       } catch (error) {
-        alert('Error');
+        alert("Error");
       } finally {
         this.isPostsLoading = false;
       }
@@ -101,7 +101,7 @@ export default {
         this.page += 1;
 
         const response = await axios.get(
-          'https://jsonplaceholder.typicode.com/posts',
+          "https://jsonplaceholder.typicode.com/posts",
           {
             params: {
               _page: this.page,
@@ -110,11 +110,11 @@ export default {
           }
         );
         this.totalPages = Math.ceil(
-          response.headers['x-total-count'] / this.limit
+          response.headers["x-total-count"] / this.limit
         );
         this.posts = [...this.posts, ...response.data];
       } catch (error) {
-        alert('Error');
+        alert("Error");
       } finally {
       }
     },
